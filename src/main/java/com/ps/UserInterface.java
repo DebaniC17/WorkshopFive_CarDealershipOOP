@@ -30,6 +30,7 @@ public class UserInterface {
             System.out.println("7) Search by vehicle type");
             System.out.println("8) Add new vehicle");
             System.out.println("9) Remove a vehicle");
+            System.out.println("10) Sell/Lease a vehicle");
             System.out.println("0) Exit");
             System.out.print("Command: ");
 
@@ -72,6 +73,10 @@ public class UserInterface {
                     processRemoveVehicleRequest();
                     break;
 
+                case 10:
+                    sellLeaseVehicle();
+                    break;
+
                 case 0:
                     running = false;
                     System.out.println("Exiting...");
@@ -87,7 +92,7 @@ public class UserInterface {
         scanner.close();
     }
 
-    private static void displayVehicles(List<Vehicle> vehicles) {
+        private static void displayVehicles(List<Vehicle> vehicles) {
         if (vehicles.isEmpty()) {
             System.out.println("No vehicle found");
         } else {
@@ -96,6 +101,14 @@ public class UserInterface {
             }
         }
     }
+//    private static void displayVehicles(Vehicle vehicle) {
+//        System.out.printf("Make: %s, Model: %s, Year: %d, Odometer: %d",
+//                vehicle.getMake(),
+//                vehicle.getModel(),
+//                vehicle.getYear(),
+//                vehicle.getOdometer()
+//        );
+//    }
 
     private static void processShowAllVehiclesRequest() {
         List<Vehicle> allVehicles = dealership.getAllVehicles();
@@ -112,6 +125,7 @@ public class UserInterface {
         displayVehicles(vehicles);
 
     }
+
     private static void processGetByMakeModelRequest() {
         System.out.print("Enter make: ");
         String make = scanner.next();
@@ -122,6 +136,7 @@ public class UserInterface {
         displayVehicles(vehicles);
 
     }
+
     private static void processGetByYearRequest() {
         System.out.print("Enter minimum year: ");
         int minYear = scanner.nextInt();
@@ -132,6 +147,7 @@ public class UserInterface {
         displayVehicles(vehicles);
 
     }
+
     private static void processGetByColorRequest() {
         System.out.print("Enter color: ");
         String color = scanner.next();
@@ -140,6 +156,7 @@ public class UserInterface {
         displayVehicles(vehicles);
 
     }
+
     private static void processGetByMileageRequest() {
         System.out.print("Enter minimum mileage: ");
         int minMileage = scanner.nextInt();
@@ -150,6 +167,7 @@ public class UserInterface {
         displayVehicles(vehicles);
 
     }
+
     private static void processGetByVehicleTypeRequest() {
         System.out.print("Enter vehicle type: ");
         String type = scanner.next();
@@ -159,6 +177,7 @@ public class UserInterface {
 
 
     }
+
     private static void processAddVehicleRequest() {
         System.out.print("Enter VIN: ");
         int vin = scanner.nextInt();
@@ -186,11 +205,23 @@ public class UserInterface {
         System.out.println("Vehicle added successfully.");
 
     }
+
     private static void processRemoveVehicleRequest() {
         System.out.println("Enter the VIN of the vehicle your wanting to remove: ");
         int vin = scanner.nextInt();
 
 
-
     }
+
+    private static void sellLeaseVehicle() {
+        System.out.println("Enter your name: ");
+        scanner.nextLine();
+        System.out.println("Enter your email: ");
+        scanner.nextLine();
+        System.out.println("Enter vehicle VIN: ");
+        scanner.nextLine();
+        System.out.println("Do you want to sell or lease the vehicle: ");
+        scanner.hasNextBoolean();
+    }
+
 }
