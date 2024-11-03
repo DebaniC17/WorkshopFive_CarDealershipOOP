@@ -46,17 +46,15 @@ public class SalesContract extends Contract {
         if (totalPrice >= 10000) {
             annualInterestRate = 0.045;
             loanTerm = 48;
+
         } else {
             annualInterestRate = 0.0525;
             loanTerm = 24;
         }
+
         double monthlyInterestRate = annualInterestRate / 12;
         return (totalPrice * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, - loanTerm));
 
-
     }
-
-
-
 
 }
