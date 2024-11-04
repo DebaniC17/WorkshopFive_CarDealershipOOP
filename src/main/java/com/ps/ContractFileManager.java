@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class ContractFileManager {
-    public void saveContract (Contract contract) {
+    public static void saveContract(Contract contract) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("contract.csv", true))) {
             if (contract instanceof SalesContract) {
                 SalesContract sale = (SalesContract) contract;

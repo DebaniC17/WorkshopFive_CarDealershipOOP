@@ -1,5 +1,6 @@
 package com.ps;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -101,14 +102,6 @@ public class UserInterface {
             }
         }
     }
-//    private static void displayVehicles(Vehicle vehicle) {
-//        System.out.printf("Make: %s, Model: %s, Year: %d, Odometer: %d",
-//                vehicle.getMake(),
-//                vehicle.getModel(),
-//                vehicle.getYear(),
-//                vehicle.getOdometer()
-//        );
-//    }
 
     private static void processShowAllVehiclesRequest() {
         List<Vehicle> allVehicles = dealership.getAllVehicles();
@@ -215,13 +208,34 @@ public class UserInterface {
 
     private static void sellLeaseVehicle() {
         System.out.println("Enter your name: ");
-        scanner.nextLine();
+        String customerName = scanner.nextLine();
         System.out.println("Enter your email: ");
-        scanner.nextLine();
+        String customerEmail = scanner.nextLine();
         System.out.println("Enter vehicle VIN: ");
-        scanner.nextLine();
-        System.out.println("Do you want to sell or lease the vehicle: ");
-        scanner.hasNextBoolean();
+        int vin = scanner.nextInt();
+
+        Vehicle vehicle =    // find vin, getVin() mmmhh
+        if (vehicle == null) {
+            System.out.println("Vehicle not found");
+            return;
+        }
+
+        System.out.println("If you want to sell enter 1,if yo want to lease enter 2: ");
+        int contractType = scanner.nextInt();
+
+        Contract contract;
+        if (contractType ==1) {
+            System.out.println("Would you like to finance (yes/no): ");
+            boolean isFinanced = scanner.nextLine().equalsIgnoreCase("yes");
+            contract = new SalesContract(LocalDate.now().toString(), customerName, customerEmail, vehicle, isFinanced);
+        } else if (contractType == 2) {
+            contract = new LeaseContract(LocalDate.now().toString(), customerName, customerEmail, vehicle);
+        } else {
+            System.out.println("Command not found, please try again.");
+            return;
+        }
+        ContractFileManager.saveContract(contract);
+        System.out.println("Contract created");
     }
 
 }
