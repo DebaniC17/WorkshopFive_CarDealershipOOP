@@ -34,7 +34,33 @@ public class ContractFileManager {
 
                 );
                 bufferedWriter.write(salesContractToAdd);
-            } else if (contract instanceof LeaseContract)
+            } else if (contract instanceof LeaseContract) {
+                LeaseContract lease = (LeaseContract) contract;
+
+                String leaseContractToAdd = String.format(
+                        "LEASE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f",
+
+                        lease.getDate(),
+                        lease.getCustomerName(),
+                        lease.getCustomerEmail(),
+                        lease.getVehicleSold().getVin(),
+                        lease.getVehicleSold().getYear(),
+                        lease.getVehicleSold().getMake(),
+                        lease.getVehicleSold().getModel(),
+                        lease.getVehicleSold().getVehicleType(),
+                        lease.getVehicleSold().getColor(),
+                        lease.getVehicleSold().getOdometer(),
+                        lease.getVehicleSold().getPrice(),
+                        lease.getExpectedEndingValue(),
+                        lease.getLeaseFee(),
+                        lease.getTotalPrice(),
+                        lease.getMonthlyPayment()
+                );
+                bufferedWriter.write(leaseContractToAdd);
+            }
+            System.out.println("Contract added");
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 }
